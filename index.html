@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TikTok 合规二创工作流 · 体验版</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#111827;--ok:#047857;--warn:#b45309;--bad:#b91c1c}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px}.hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;margin-bottom:18px}.hero h1{margin:0;font-size:28px}.hero p{margin:6px 0 0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 3px 14px rgba(17,24,39,.04)}
+label{font-size:13px;font-weight:650;display:block;margin:10px 0 6px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;font:inherit;background:#fff}textarea{min-height:98px;resize:vertical}
+button{border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}.primary{background:var(--accent);color:white}.ghost{background:#eef2f7;color:#111827}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700}.low{background:#d1fae5;color:#065f46}.mid{background:#fef3c7;color:#92400e}.high{background:#fee2e2;color:#991b1b}
+.step{border-left:3px solid #d1d5db;padding-left:12px;margin:14px 0}.step h3{font-size:15px;margin:0 0 6px}.step p,.step pre{margin:0;color:#374151;white-space:pre-wrap}.out{background:#f9fafb;border:1px dashed #d1d5db;border-radius:12px;padding:12px;margin-top:8px;min-height:48px}.tiny{font-size:12px;color:var(--muted)}
+.check{display:flex;gap:8px;align-items:flex-start;margin:7px 0;font-size:14px}.check input{width:auto;margin-top:2px}.footer{margin:18px 0 4px;color:var(--muted);font-size:12px}.full{grid-column:1/-1}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}.wrap{padding:14px}.hero h1{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div><h1>🎬 TikTok 合规二创工作流</h1><p>抖音 / 快手素材 → 风险判断 → 授权动作 → 英文化 → 剪辑 → 发布 QC</p></div>
+    <div class="tiny">体验版 v1 · 本地运行 · 不上传你的数据</div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2 style="margin-top:0">① 输入素材</h2>
+      <div class="row">
+        <div><label>来源平台</label><select id="platform"><option>抖音</option><option>快手</option><option>小红书</option><option>自有素材</option><option>其他</option></select></div>
+        <div><label>内容赛道</label><select id="category"><option>中国制造 / 工厂过程</option><option>非遗 / 手艺 / 修复</option><option>中国生活方式</option><option>装修 / 空间改造</option><option>工具技巧 / 小发明</option><option>美食制作过程</option><option>人物剧情 / 搞笑</option><option>影视 / 综艺 / 动漫</option></select></div>
+      </div>
+      <label>素材链接</label><input id="url" placeholder="https://...（只做记录，不自动抓取）" />
+      <label>原视频标题 / 内容简介 / 你看到的关键画面</label><textarea id="summary" placeholder="例：一家工厂用自动设备把金属板折成柜体，过程很解压，成品前后反差大。"></textarea>
+      <div class="row">
+        <div><label>是否已取得原作者书面授权？</label><select id="permission"><option value="no">没有</option><option value="yes">有</option><option value="own">自有原创</option></select></div>
+        <div><label>是否明显含第三方版权元素？</label><select id="copyright"><option value="none">无明显第三方元素</option><option value="music">热门音乐 / MV</option><option value="film">影视 / 综艺 / 动漫画面</option><option value="sports">体育赛事画面</option><option value="brand">大量品牌 / 商标</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>是否真人露脸为主体？</label><select id="person"><option value="no">不是</option><option value="yes">是</option></select></div>
+        <div><label>计划商业化？</label><select id="commercial"><option value="no">暂不带货</option><option value="yes">带货 / 联盟 / 广告</option></select></div>
+      </div>
+      <div class="actions"><button class="primary" onclick="generate()">⚡ 一键生成 TikTok 二创方案</button><button class="ghost" onclick="demo()">填入示例</button><button class="ghost" onclick="resetAll()">清空</button></div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin-top:0">② 合规闸门</h2>
+      <div id="risk"><span class="badge mid">等待输入</span></div>
+      <div class="step"><h3>能不能直接用原视频画面？</h3><div class="out" id="useFootage">先生成方案。</div></div>
+      <div class="step"><h3>下一步动作</h3><div class="out" id="nextAction">—</div></div>
+      <div class="step"><h3>授权私信</h3><div class="out" id="authMsg">—</div></div>
+    </section>
+
+    <section class="card full">
+      <h2 style="margin-top:0">③ TikTok 成片方案</h2>
+      <div class="row">
+        <div class="step"><h3>英文 Hook</h3><div class="out" id="hook">—</div></div>
+        <div class="step"><h3>TikTok 标题</h3><div class="out" id="title">—</div></div>
+      </div>
+      <div class="row">
+        <div class="step"><h3>中文旁白稿</h3><div class="out" id="cn">—</div></div>
+        <div class="step"><h3>英文字幕稿</h3><div class="out" id="en">—</div></div>
+      </div>
+      <div class="row">
+        <div class="step"><h3>25–35 秒剪辑时间轴</h3><div class="out" id="timeline">—</div></div>
+        <div class="step"><h3>CML 音乐搜索词</h3><div class="out" id="music">—</div></div>
+      </div>
+      <div class="row">
+        <div class="step"><h3>标签</h3><div class="out" id="tags">—</div></div>
+        <div class="step"><h3>信息增量 / 二创要求</h3><div class="out" id="transform">—</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin-top:0">④ 发布前 QC</h2>
+      <div id="qc"></div>
+    </section>
+    <section class="card">
+      <h2 style="margin-top:0">⑤ 导出</h2>
+      <p class="tiny">把当前方案保存为 TXT，方便你发给剪映、AI 配音或继续整理。</p>
+      <div class="actions"><button class="primary" onclick="downloadTxt()">⬇️ 下载当前方案 TXT</button><button class="ghost" onclick="copyAll()">复制全部结果</button></div>
+      <p id="copyStatus" class="tiny"></p>
+    </section>
+  </div>
+  <div class="footer">说明：这是流程体验工具，不代替版权法律意见。对第三方视频，优先使用书面授权或重拍/自制素材；商业内容请额外核对音乐、商标、肖像和平台披露要求。</div>
+</div>
+<script>
+const data = {
+"中国制造 / 工厂过程": {hook:"You probably never guessed how this is made in China.", music:"industrial / satisfying / minimal beat / clean percussion", tags:"#MadeInChina #FactoryProcess #Satisfying #HowItsMade #Manufacturing", angle:"补充‘这一步为什么重要 / 工艺解决了什么问题’，不要只做画面拼接。"},
+"非遗 / 手艺 / 修复": {hook:"This craft takes years to master — watch the final detail.", music:"traditional texture / cinematic calm / artisan / slow percussion", tags:"#ChineseCraft #Artisan #Restoration #Handmade #Craftsmanship", angle:"补充工艺名称、材料、关键步骤、文化背景；避免把别人的成片当成自己的作品。"},
+"中国生活方式": {hook:"A normal day in China can look surprisingly different from what you expect.", music:"daily vlog / light upbeat / city life / acoustic", tags:"#LifeInChina #ChinaDaily #EverydayChina #Culture #TravelTok", angle:"加入背景解释和跨文化信息，让海外用户看得懂‘为什么这样做’。"},
+"装修 / 空间改造": {hook:"This tiny design change completely transforms the space.", music:"home diy / clean beat / makeover / light electronic", tags:"#InteriorDesign #HomeMakeover #SmallSpace #DesignTips #BeforeAfter", angle:"最好加入你自己的平面/3D分析、尺寸逻辑和改造原因，形成明显原创增量。"},
+"工具技巧 / 小发明": {hook:"This simple tool solves a problem most people just tolerate.", music:"techy / tutorial / satisfying clicks / upbeat", tags:"#Tools #LifeHack #SmartDesign #DIY #Gadgets", angle:"解释工具原理、适用场景、优缺点，不要只做‘神奇工具合集’。"},
+"美食制作过程": {hook:"The most satisfying part is what happens in the last five seconds.", music:"food prep / upbeat / rhythmic / satisfying", tags:"#ChineseFood #FoodProcess #StreetFood #Cooking #FoodTok", angle:"尽量选制作过程而非网红出镜；补充食材、步骤、地域信息。"},
+"人物剧情 / 搞笑": {hook:"Context changes everything in this clip.", music:"comedy / quirky / light beat", tags:"#Comedy #Storytime #Culture", angle:"高肖像/授权风险。更适合拿‘梗概’重新演绎或自制，而不是搬原画面。"},
+"影视 / 综艺 / 动漫": {hook:"—", music:"—", tags:"—", angle:"高版权风险，不建议作为搬运赛道。改做评论/解析也应严格控制必要引用并增加原创分析。"}
+};
+function val(id){return document.getElementById(id).value}
+function set(id,txt){document.getElementById(id).innerText=txt}
+function riskCalc(){
+ let score=0, reasons=[];
+ if(val('permission')==='no'){score+=2;reasons.push('未取得原作者书面授权')}
+ if(val('permission')==='own'){score-=2}
+ if(val('copyright')!=='none'){score+=3;reasons.push('存在第三方版权/商标元素')}
+ if(val('person')==='yes'){score+=1;reasons.push('真人露脸为主体')}
+ if(val('category')==='影视 / 综艺 / 动漫'){score+=4;reasons.push('影视/综艺/动漫本身属于高风险素材')}
+ if(val('commercial')==='yes'){score+=1;reasons.push('计划商业化，权利链要求更高')}
+ return {score,reasons};
+}
+function generate(){
+ const cat=val('category'), s=val('summary').trim()||'这个素材展示了一个有明显视觉过程和结果反差的场景。', d=data[cat];
+ const r=riskCalc(); let cls='low', label='低风险'; if(r.score>=5){cls='high';label='高风险'}else if(r.score>=2){cls='mid';label='中风险'};
+ document.getElementById('risk').innerHTML='<span class="badge '+cls+'">'+label+'</span> <span class="tiny">'+(r.reasons.length?r.reasons.join('；'):'当前输入未发现明显高风险项')+'</span>';
+ const perm=val('permission');
+ if(perm==='own') set('useFootage','可以。你标记为自有原创，但仍需确认音乐、商标、场地和出镜人的权利。');
+ else if(perm==='yes' && val('copyright')==='none') set('useFootage','原则上可以在授权范围内使用，但应保留授权证据，并确认授权包含 TikTok、商业化（如需要）、剪辑改编。');
+ else set('useFootage','不建议直接发布原视频画面。优先先取得书面授权；拿不到就只借鉴选题/结构，改成重拍、自制 B-roll、3D/图解版本。');
+ let action='';
+ if(cat==='影视 / 综艺 / 动漫') action='建议放弃“搬原片”路线，改成自制解说/观点视频，并谨慎使用必要片段。';
+ else if(perm==='no') action='1. 联系原作者拿书面授权；2. 同时准备“无授权替代版”：重拍/自制镜头；3. 用英文重新解释信息，而不是翻译字幕后直发。';
+ else action='进入脚本重构：重排镜头顺序、添加英文解说和信息增量、替换为可用音乐、做发布前 QC。';
+ set('nextAction',action);
+ set('authMsg','你好，我很喜欢你这条作品（'+(val('url')||'链接')+'）。我计划将其用于 TikTok 的英文二创版本，会重新编写旁白、字幕和剪辑结构，并注明原作者。请问是否授权我在 TikTok 使用该视频画面并进行剪辑改编？'+(val('commercial')==='yes'?'该账号未来可能包含商业化/联盟推广，如同意也请明确包含商业用途。':'')+' 如同意，请回复“同意授权 @我的账号 在 TikTok 使用并改编此视频'+(val('commercial')==='yes'?'，包含商业用途':'')+'”。谢谢。');
+ set('hook',d.hook);
+ const short = s.replace(/[。！？\n]/g,' ').slice(0,56);
+ set('title',d.hook.replace(/[.!?]/g,'')+' | '+short);
+ const cn = '【0–3秒】先给结果：'+cat+'里最值得看的不是“猎奇”，而是它解决问题的方式。\n【3–10秒】这个素材里，'+s+'\n【10–22秒】重点看三个信息：第一，过程里最关键的一步；第二，它为什么比常规方式更有效/更有趣；第三，最后成品或结果有什么反差。\n【22–30秒】我会把这类中国本土内容重新解释给海外观众，而不是简单搬运。你还想看哪一类？';
+ set('cn',cn);
+ const en = '0–3s: Here\'s what makes this worth watching — not just the visual, but how the process solves a real problem.\n3–10s: In this clip, '+(short || 'you can see a clear process with a strong before-and-after result')+'.\n10–22s: Watch three things: the key step, why it works, and the final contrast.\n22–30s: I turn interesting Chinese content into clear stories for global viewers. What should I explain next?';
+ set('en',en);
+ set('timeline','0–2s：最强结果镜头/反差镜头 + 英文 Hook\n2–6s：快速交代“这是在做什么”\n6–15s：只保留 2–3 个关键步骤，镜头重排\n15–24s：加入英文信息增量：原理/背景/用途\n24–30s：结果镜头 + 一句总结\n30–35s：CTA：What should I explain next?');
+ set('music',d.music);
+ set('tags',d.tags);
+ set('transform','必须至少做到：①重新写英文叙事；②镜头顺序重构；③增加解释/背景/原理；④新字幕版式；⑤替换为合法音乐；⑥保留授权证据。\n本赛道建议：'+d.angle);
+ const qs=[
+  '我拥有该视频画面的权利，或已保存原作者书面授权证据',
+  '没有直接使用影视、综艺、动漫、赛事等受保护片段',
+  '音乐来源已核对；商业内容优先使用平台允许的商业音乐',
+  '真人露脸素材已确认肖像/授权范围',
+  '没有把“裁剪、镜像、变速、去水印”当成主要二创',
+  '已经加入新的英文解说、背景信息或分析',
+  '标题与字幕没有虚假、医疗、夸大效果宣称',
+  '如果带货/广告/联盟推广，已准备使用平台商业披露功能',
+  '如使用逼真 AI 生成/修改内容，已准备按平台要求标注'
+ ];
+ document.getElementById('qc').innerHTML=qs.map((q,i)=>'<label class="check"><input type="checkbox" id="q'+i+'"><span>'+q+'</span></label>').join('');
+}
+function demo(){document.getElementById('category').value='中国制造 / 工厂过程';document.getElementById('url').value='https://www.douyin.com/example';document.getElementById('summary').value='一家金属加工厂用自动折弯设备，把一张平板连续折成复杂柜体结构。最吸引人的是最后成型的一瞬间。';document.getElementById('permission').value='no';document.getElementById('copyright').value='none';document.getElementById('person').value='no';document.getElementById('commercial').value='no';generate()}
+function resetAll(){location.reload()}
+function allText(){return 'TikTok 合规二创方案\n\n来源：'+val('platform')+'\n链接：'+val('url')+'\n赛道：'+val('category')+'\n简介：'+val('summary')+'\n\n【合规判断】\n'+document.getElementById('risk').innerText+'\n'+document.getElementById('useFootage').innerText+'\n'+document.getElementById('nextAction').innerText+'\n\n【英文 Hook】\n'+document.getElementById('hook').innerText+'\n\n【中文旁白】\n'+document.getElementById('cn').innerText+'\n\n【英文字幕】\n'+document.getElementById('en').innerText+'\n\n【剪辑时间轴】\n'+document.getElementById('timeline').innerText+'\n\n【CML 搜索词】\n'+document.getElementById('music').innerText+'\n\n【标签】\n'+document.getElementById('tags').innerText+'\n\n【二创要求】\n'+document.getElementById('transform').innerText+'\n\n【授权私信】\n'+document.getElementById('authMsg').innerText}
+function downloadTxt(){const blob=new Blob([allText()],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TikTok_二创方案.txt';a.click();URL.revokeObjectURL(a.href)}
+async function copyAll(){try{await navigator.clipboard.writeText(allText());set('copyStatus','已复制到剪贴板。')}catch(e){set('copyStatus','浏览器限制复制，请使用“下载当前方案 TXT”。')}}
+demo();
+</script>
+</body>
+</html>

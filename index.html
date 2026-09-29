@@ -1,84 +1,82 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>TikTok Money Machine v2</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TikTok Money Machine v3</title>
 <style>
-:root{--bg:#0b1020;--card:#121a2e;--card2:#172036;--text:#eef2ff;--muted:#9aa4bd;--line:#27314a;--accent:#7c3aed;--accent2:#22c55e;--warn:#f59e0b;--bad:#ef4444}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,#080d18,#0e1424 40%,#0b1020);color:var(--text)}
-.wrap{max-width:1240px;margin:auto;padding:20px}.hero{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-bottom:16px}.hero h1{margin:0;font-size:30px}.hero p{margin:7px 0 0;color:var(--muted)}.tag{background:#241a44;border:1px solid #4c2ea8;padding:7px 10px;border-radius:999px;font-size:12px}
-.nav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.nav button{background:#111827;color:#cbd5e1;border:1px solid var(--line)}.nav button.active{background:var(--accent);color:white;border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:rgba(18,26,46,.94);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}.full{grid-column:1/-1}
-h2{font-size:18px;margin:0 0 10px}h3{font-size:14px;margin:0 0 8px}.muted,.tiny{color:var(--muted)}.tiny{font-size:12px}
-label{display:block;font-size:12px;font-weight:700;margin:9px 0 5px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-input,select,textarea{width:100%;background:#0d1425;color:var(--text);border:1px solid #334155;border-radius:10px;padding:10px;font:inherit}textarea{min-height:90px;resize:vertical}
-button{border:0;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:white}.green{background:#15803d;color:white}.ghost{background:#1f2937;color:#e5e7eb}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:13px}.kpi b{display:block;font-size:22px;margin-top:4px}
-.score{font-size:42px;font-weight:900}.good{color:#4ade80}.mid{color:#fbbf24}.bad{color:#f87171}.meter{height:9px;background:#263044;border-radius:99px;overflow:hidden}.meter i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#22c55e)}
-.out{background:#0d1425;border:1px dashed #3b4764;border-radius:11px;padding:11px;white-space:pre-wrap;min-height:48px}.tabs>section{display:none}.tabs>section.active{display:block}
-table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left}th{color:#c7d2fe}.pill{display:inline-block;border-radius:999px;padding:4px 8px;font-size:11px;background:#1e293b}
-.task{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}.task input{width:auto;margin-top:3px}
-.footer{font-size:11px;color:var(--muted);margin:18px 0}
-@media(max-width:850px){.grid,.row,.row3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.hero{align-items:flex-start;flex-direction:column}.full{grid-column:auto}.wrap{padding:12px}}
+:root{--bg:#07101f;--card:#0f1b2f;--card2:#14243e;--text:#eef5ff;--muted:#8fa2bf;--line:#263a58;--p:#7c3aed;--g:#22c55e;--y:#f59e0b;--r:#ef4444}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(circle at top,#10203c 0,#07101f 42%);color:var(--text)}
+.wrap{max-width:1280px;margin:auto;padding:18px}.hero{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.hero h1{margin:0;font-size:30px}.hero p{margin:7px 0;color:var(--muted)}
+.status{padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;background:#0b1628}.ok{color:#86efac}.err{color:#fca5a5}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.nav button{background:#101827;color:#cbd5e1;border:1px solid var(--line)}.nav button.active{background:var(--p);color:white}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:rgba(15,27,47,.96);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.18)}.full{grid-column:1/-1}
+h2{font-size:18px;margin:0 0 10px}h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}
+label{display:block;font-size:12px;font-weight:800;margin:8px 0 5px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+input,select,textarea{width:100%;background:#081322;color:var(--text);border:1px solid #324866;border-radius:10px;padding:10px;font:inherit}textarea{min-height:88px;resize:vertical}
+button{border:0;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}.primary{background:var(--p);color:white}.green{background:#15803d;color:white}.ghost{background:#1e293b;color:#e5e7eb}.danger{background:#7f1d1d;color:#fee2e2}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:12px}.kpi b{font-size:22px;display:block;margin-top:4px}
+.out{background:#081322;border:1px dashed #395173;border-radius:11px;padding:11px;white-space:pre-wrap;min-height:48px}.score{font-size:46px;font-weight:900}.meter{height:9px;background:#263044;border-radius:99px;overflow:hidden}.meter i{height:100%;display:block;background:linear-gradient(90deg,#7c3aed,#22c55e)}
+.tabs>section{display:none}.tabs>section.active{display:block}.pill{display:inline-block;border-radius:999px;padding:4px 8px;background:#1e293b;font-size:11px}.good{color:#4ade80}.mid{color:#fbbf24}.bad{color:#f87171}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px;border-bottom:1px solid var(--line);text-align:left}th{color:#c7d2fe}.task{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--line)}.task input{width:auto;margin-top:2px}
+.variant{border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#0b1628}.footer{font-size:11px;color:var(--muted);margin:18px 0}
+@media(max-width:850px){.grid,.row,.row3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.hero{flex-direction:column}.full{grid-column:auto}.wrap{padding:12px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hero"><div><h1>💸 TikTok Money Machine v2</h1><p>选品 → 评分 → 带货脚本 → 收益计算 → 数据复盘 → 30天执行</p></div><span class="tag">可直接使用 · 规则/计算版 · 数据保存在本机</span></div>
+  <div class="hero">
+    <div><h1>💸 TikTok Money Machine v3</h1><p>从“演示工具”升级成：选品 → 批量脚本 → 收益预测 → 发布记录 → 复盘动作。</p></div>
+    <div id="apiStatus" class="status">后端连接检测中…</div>
+  </div>
   <div class="nav" id="nav"></div>
   <div class="tabs">
-    <section id="tab-product" class="active">
+    <section id="tab-workbench" class="active">
       <div class="grid">
         <div class="card">
-          <h2>① 选品评分器</h2>
+          <h2>① 商品工作台</h2>
           <div class="row">
             <div><label>商品名称</label><input id="pName" placeholder="例：折叠水槽置物架"></div>
-            <div><label>变现方式</label><select id="moneyMode"><option>TikTok Shop 联盟</option><option>自营商品</option><option>数字产品</option><option>引流接单</option><option>品牌合作</option></select></div>
+            <div><label>变现方式</label><select id="mode"><option>TikTok Shop 联盟</option><option>自营商品</option><option>数字产品</option><option>引流接单</option></select></div>
           </div>
+          <label>核心卖点 / 场景</label><textarea id="benefit" placeholder="例：免打孔、排水快、台面更整洁"></textarea>
           <div class="row3">
             <div><label>售价 USD</label><input id="price" type="number" value="29.99"></div>
             <div><label>佣金率 %</label><input id="commission" type="number" value="20"></div>
-            <div><label>预计退货率 %</label><input id="refund" type="number" value="8"></div>
+            <div><label>退货率 %</label><input id="refund" type="number" value="8"></div>
           </div>
-          <label>商品卖点 / 使用场景</label><textarea id="benefit" placeholder="例：免打孔、收纳海绵洗洁精、快速排水、厨房台面更干净"></textarea>
+          <h3 style="margin-top:14px">选品维度（1–10）</h3>
           <div class="row3">
-            <div><label>视觉冲击 1-10</label><input id="visual" type="number" min="1" max="10" value="8"></div>
-            <div><label>痛点强度 1-10</label><input id="pain" type="number" min="1" max="10" value="8"></div>
-            <div><label>演示容易度 1-10</label><input id="demoEase" type="number" min="1" max="10" value="9"></div>
-            <div><label>佣金吸引力 1-10</label><input id="commScore" type="number" min="1" max="10" value="7"></div>
-            <div><label>竞争友好度 1-10</label><input id="competition" type="number" min="1" max="10" value="6"></div>
-            <div><label>AI内容适配 1-10</label><input id="aiFit" type="number" min="1" max="10" value="8"></div>
+            <div><label>视觉冲击</label><input id="visual" type="number" min="1" max="10" value="8"></div>
+            <div><label>痛点强度</label><input id="pain" type="number" min="1" max="10" value="8"></div>
+            <div><label>演示容易</label><input id="demoEase" type="number" min="1" max="10" value="9"></div>
+            <div><label>佣金吸引</label><input id="commScore" type="number" min="1" max="10" value="7"></div>
+            <div><label>竞争友好</label><input id="competition" type="number" min="1" max="10" value="6"></div>
+            <div><label>AI适配</label><input id="aiFit" type="number" min="1" max="10" value="8"></div>
           </div>
-          <div class="actions"><button class="primary" onclick="scoreProduct()">计算评分</button><button class="ghost" onclick="fillProductDemo()">填入示例</button></div>
+          <div class="actions"><button class="primary" onclick="scoreProduct()">服务器评分</button><button class="green" onclick="generateScripts()">生成3套测试脚本</button><button class="ghost" onclick="demo()">示例</button></div>
         </div>
+
         <div class="card">
-          <h2>选品结论</h2>
-          <div class="score" id="scoreNum">--</div>
+          <h2>选品结果</h2>
+          <div id="scoreNum" class="score">--</div>
           <div class="meter"><i id="meter" style="width:0%"></i></div>
-          <p id="scoreText" class="muted">先填写商品并计算。</p>
-          <div class="out" id="scoreAdvice">—</div>
+          <p id="scoreText" class="muted">等待服务器评分。</p>
+          <div class="kpis">
+            <div class="kpi"><span class="tiny">等级</span><b id="tier">--</b></div>
+            <div class="kpi"><span class="tiny">每单佣金</span><b id="perOrder">$0</b></div>
+            <div class="kpi"><span class="tiny">判断</span><b id="verdict" style="font-size:15px">--</b></div>
+            <div class="kpi"><span class="tiny">下一步</span><b id="nextMini" style="font-size:12px">--</b></div>
+          </div>
+          <div class="out" id="bottleneck">—</div>
         </div>
 
         <div class="card full">
-          <h2>② 一键带货脚本生成</h2>
+          <h2>② 批量脚本实验</h2>
           <div class="row">
-            <div><label>内容方向</label><select id="angle"><option>痛点解决</option><option>前后对比</option><option>神奇工具</option><option>测评体验</option><option>3个理由</option><option>中国好物介绍</option></select></div>
-            <div><label>目标市场</label><select id="market"><option>美国英语</option><option>东南亚英语</option><option>日本</option><option>全球英语</option></select></div>
+            <div><label>脚本方向</label><select id="angle"><option>痛点解决</option><option>前后对比</option><option>神奇工具</option><option>测评体验</option><option>3个理由</option><option>中国好物介绍</option></select></div>
+            <div><label>目标市场</label><select id="market"><option>美国英语</option><option>全球英语</option><option>日本</option><option>东南亚英语</option></select></div>
           </div>
-          <div class="actions"><button class="green" onclick="generateSalesScript()">生成成片方案</button></div>
-          <div class="row">
-            <div><label>英文 Hook</label><div class="out" id="hook">—</div></div>
-            <div><label>TikTok 标题</label><div class="out" id="title">—</div></div>
-          </div>
-          <div class="row">
-            <div><label>中文旁白</label><div class="out" id="cnScript">—</div></div>
-            <div><label>英文旁白 / 字幕</label><div class="out" id="enScript">—</div></div>
-          </div>
-          <div class="row">
-            <div><label>镜头表 25–35秒</label><div class="out" id="shotlist">—</div></div>
-            <div><label>CTA + CML + 标签</label><div class="out" id="ctaBox">—</div></div>
-          </div>
+          <div id="scripts"><div class="out">点击“生成3套测试脚本”。</div></div>
         </div>
       </div>
     </section>
@@ -86,23 +84,23 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px;borde
     <section id="tab-profit">
       <div class="grid">
         <div class="card">
-          <h2>③ 收益计算器</h2>
+          <h2>③ 收益情景模拟</h2>
           <div class="row3">
             <div><label>播放量</label><input id="views" type="number" value="100000"></div>
-            <div><label>商品点击率 CTR %</label><input id="ctr" type="number" step="0.1" value="2.5"></div>
-            <div><label>点击成交率 CVR %</label><input id="cvr" type="number" step="0.1" value="3"></div>
+            <div><label>CTR %</label><input id="ctr" type="number" step="0.1" value="2.5"></div>
+            <div><label>CVR %</label><input id="cvr" type="number" step="0.1" value="3"></div>
           </div>
-          <div class="actions"><button class="primary" onclick="calcProfit()">计算预估收益</button></div>
+          <div class="actions"><button class="primary" onclick="calcProfit()">计算基准</button><button class="ghost" onclick="scenario('low')">保守</button><button class="ghost" onclick="scenario('mid')">中性</button><button class="ghost" onclick="scenario('high')">积极</button></div>
         </div>
         <div class="card">
-          <h2>预估结果</h2>
+          <h2>预测结果</h2>
           <div class="kpis">
             <div class="kpi"><span class="tiny">点击</span><b id="rClicks">0</b></div>
             <div class="kpi"><span class="tiny">订单</span><b id="rOrders">0</b></div>
             <div class="kpi"><span class="tiny">GMV</span><b id="rGmv">$0</b></div>
             <div class="kpi"><span class="tiny">净佣金</span><b id="rProfit">$0</b></div>
           </div>
-          <p class="tiny" id="rpmText"></p>
+          <div class="out" id="profitAdvice">—</div>
         </div>
       </div>
     </section>
@@ -110,93 +108,83 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px;borde
     <section id="tab-dashboard">
       <div class="grid">
         <div class="card">
-          <h2>④ 收益看板 · 录入一条视频</h2>
-          <div class="row">
-            <div><label>视频标题</label><input id="dTitle" placeholder="例：Sink Rack Test #01"></div>
-            <div><label>日期</label><input id="dDate" type="date"></div>
-          </div>
+          <h2>④ 发布结果录入</h2>
+          <div class="row"><div><label>视频标题</label><input id="dTitle"></div><div><label>日期</label><input id="dDate" type="date"></div></div>
           <div class="row3">
             <div><label>播放</label><input id="dViews" type="number"></div>
             <div><label>点击</label><input id="dClicks" type="number"></div>
             <div><label>订单</label><input id="dOrders" type="number"></div>
-            <div><label>GMV USD</label><input id="dGmv" type="number"></div>
-            <div><label>佣金 USD</label><input id="dComm" type="number"></div>
+            <div><label>GMV</label><input id="dGmv" type="number"></div>
+            <div><label>佣金</label><input id="dComm" type="number"></div>
           </div>
-          <div class="actions"><button class="green" onclick="addRecord()">保存记录</button><button class="ghost" onclick="clearRecords()">清空全部</button></div>
+          <div class="actions"><button class="green" onclick="addRecord()">保存结果</button><button class="ghost" onclick="exportData()">导出JSON</button><button class="danger" onclick="clearRecords()">清空</button></div>
         </div>
         <div class="card">
-          <h2>累计指标</h2>
+          <h2>累计结果</h2>
           <div class="kpis">
             <div class="kpi"><span class="tiny">总播放</span><b id="kViews">0</b></div>
             <div class="kpi"><span class="tiny">总订单</span><b id="kOrders">0</b></div>
             <div class="kpi"><span class="tiny">总GMV</span><b id="kGmv">$0</b></div>
             <div class="kpi"><span class="tiny">总佣金</span><b id="kComm">$0</b></div>
           </div>
-          <p class="tiny" id="kExtra"></p>
+          <div class="out" id="kAdvice">还没有真实发布数据。</div>
         </div>
-        <div class="card full">
-          <h2>视频表现明细</h2>
-          <div style="overflow:auto"><table><thead><tr><th>日期</th><th>视频</th><th>播放</th><th>CTR</th><th>CVR</th><th>GMV</th><th>佣金</th><th>千播收益</th></tr></thead><tbody id="recordsBody"></tbody></table></div>
-        </div>
+        <div class="card full"><h2>视频明细</h2><div style="overflow:auto"><table><thead><tr><th>日期</th><th>视频</th><th>播放</th><th>CTR</th><th>CVR</th><th>GMV</th><th>佣金</th><th>千播收益</th></tr></thead><tbody id="recordsBody"></tbody></table></div></div>
       </div>
     </section>
 
     <section id="tab-plan">
       <div class="grid">
         <div class="card full">
-          <h2>⑤ 30天紧凑执行计划</h2>
-          <p class="muted">目标不是“每天研究”，而是每天完成一个能推动成交的动作。前7天跑通，8–14天测品，15–30天复制表现好的模板。</p>
-          <div class="actions"><button class="primary" onclick="resetPlan()">重置30天计划</button></div>
+          <h2>⑤ 14天冲刺计划</h2>
+          <p class="muted">先别做30天大计划。现在只做14天，目标：找到至少1个“商品×Hook”组合，能跑出可复现数据。</p>
           <div id="planList"></div>
         </div>
       </div>
     </section>
 
-    <section id="tab-compliance">
+    <section id="tab-security">
       <div class="grid">
         <div class="card">
-          <h2>⑥ 商业发布 QC</h2>
-          <div id="qcList"></div>
-        </div>
-        <div class="card">
-          <h2>授权原则</h2>
-          <div class="out">第三方原视频：优先取得书面授权；没有授权时，不直接发布原画面，改成重拍、自制 B-roll、3D/图解或仅借鉴选题结构。
+          <h2>⑥ 安全状态</h2>
+          <div class="out">当前：评分、收益计算、脚本生成已经改为通过 /api 后端执行，前端不再直接执行核心计算。
 
-商业内容：音乐、肖像、商标、商品宣称、平台商业披露都要单独核对。
+注意：你的 GitHub 仓库目前仍是公开仓库，所以“后端源代码”仍可被查看。真正做到源码私有，需要把仓库改为 Private，Vercel 仍可继续从私有仓库部署。
 
-“裁剪、镜像、变速、去水印”不等于原创增量。</div>
+另外：之前发到聊天里的 Vercel vck_... 凭据应继续按“已暴露”处理并撤销。</div>
         </div>
+        <div class="card"><h2>商业发布检查</h2><div id="qc"></div></div>
       </div>
     </section>
   </div>
-  <div class="footer">这套工具帮助你建立可执行的商业内容系统，但不会保证收益。真实结果取决于账号资格、流量、选品、内容质量、市场和转化。</div>
+  <div class="footer">v3 目标：不再只显示几个数字，而是让每个数字都对应下一步动作。预测不等于保证收益，真实结果仍由流量、商品、账号资格和转化决定。</div>
 </div>
 <script>
-const tabs=[['product','选品+脚本'],['profit','收益计算'],['dashboard','收益看板'],['plan','30天计划'],['compliance','合规QC']];
+const tabs=[['workbench','商品工作台'],['profit','收益模拟'],['dashboard','结果看板'],['plan','14天冲刺'],['security','安全/合规']];
 const nav=document.getElementById('nav');
-tabs.forEach(([id,name],i)=>{const b=document.createElement('button');b.textContent=name;b.className=i===0?'active':'';b.onclick=()=>openTab(id,b);nav.appendChild(b)});
-function openTab(id,b){document.querySelectorAll('.tabs>section').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
-function n(id){return Number(document.getElementById(id).value)||0} function v(id){return document.getElementById(id).value.trim()} function set(id,t){document.getElementById(id).textContent=t}
-function scoreProduct(){const s=[n('visual'),n('pain'),n('demoEase'),n('commScore'),n('competition'),n('aiFit')];const weights=[.2,.2,.18,.17,.12,.13];let score=s.reduce((a,x,i)=>a+x*weights[i],0)*10;score=Math.round(score);set('scoreNum',score+'/100');document.getElementById('meter').style.width=score+'%';const el=document.getElementById('scoreNum');el.className='score '+(score>=80?'good':score>=65?'mid':'bad');let txt='',adv='';if(score>=80){txt='优先测试：视觉、痛点和演示能力都比较适合短视频带货。';adv='建议：先做 3 个不同 Hook 的同商品视频，48小时看 CTR、CVR 和千播收益；有一条明显领先，就立即复制 5 个变体。'}else if(score>=65){txt='可测试，但不要重投入。';adv='建议：先用低成本素材做 1–2 条。若 CTR 低，换 Hook/封面；若 CTR 高但不成交，检查价格、信任和商品页面。'}else{txt='暂不优先。';adv='建议换一个“更容易一眼看懂效果、痛点更强、佣金更合理”的商品。'}set('scoreText',txt);set('scoreAdvice',adv);saveProduct()}
-function fillProductDemo(){document.getElementById('pName').value='折叠水槽置物架';document.getElementById('benefit').value='免打孔；海绵、洗洁精集中收纳；快速排水；减少台面杂乱';document.getElementById('price').value=29.99;document.getElementById('commission').value=20;document.getElementById('refund').value=8;scoreProduct();generateSalesScript();calcProfit()}
-function generateSalesScript(){const name=v('pName')||'这个商品', benefit=v('benefit')||'解决一个日常高频痛点', angle=document.getElementById('angle').value;let hook='';if(angle==='痛点解决')hook='If your kitchen counter always looks messy, this fixes the problem in seconds.';if(angle==='前后对比')hook='Watch this tiny upgrade completely change the space.';if(angle==='神奇工具')hook='This simple gadget solves a problem most people just live with.';if(angle==='测评体验')hook='I tested this so you do not have to — here is what actually matters.';if(angle==='3个理由')hook='Three reasons this is smarter than it looks.';if(angle==='中国好物介绍')hook='This everyday product from China is surprisingly practical.';set('hook',hook);set('title',name+' — worth it or just hype?');set('cnScript','【0–3秒】先展示痛点：别再让这个问题每天重复出现。\n【3–8秒】拿出 '+name+'，一句话说清：'+benefit+'。\n【8–18秒】演示最关键的 2 个动作，只拍“怎么用”和“立刻产生什么变化”。\n【18–26秒】给前后对比，补一句真实限制：适合谁、不适合谁。\n【26–32秒】如果你刚好有这个痛点，商品链接放在下方。');set('enScript','0–3s: '+hook+'\n3–8s: This is the '+name+'. It is designed to '+benefit+'.\n8–18s: Show the two most useful actions, fast and clearly.\n18–26s: Show the before/after result and mention one honest limitation.\n26–32s: If you have the same problem, I linked it below.');set('shotlist','0–2s 痛点近景\n2–5s 商品出现\n5–10s 安装/第一动作\n10–16s 第二动作/效果\n16–23s 前后对比\n23–28s 细节证明\n28–32s CTA + 商品链接提示');set('ctaBox','CTA: “I linked it below if you want to try it.”\nCML搜索：clean upbeat / product demo / satisfying / light electronic\n标签：#TikTokMadeMeBuyIt #HomeHacks #UsefulProducts #ProductTest #SmartHome');saveProduct()}
-function calcProfit(){const views=n('views'),ctr=n('ctr')/100,cvr=n('cvr')/100,price=n('price'),rate=n('commission')/100,refund=n('refund')/100;const clicks=views*ctr,orders=clicks*cvr,gmv=orders*price,profit=gmv*rate*(1-refund);set('rClicks',Math.round(clicks).toLocaleString());set('rOrders',Math.round(orders).toLocaleString());set('rGmv','$'+gmv.toFixed(2));set('rProfit','$'+profit.toFixed(2));set('rpmText','每千播放预估佣金：$'+(views?profit/views*1000:0).toFixed(2)+' · 每单净佣金：$'+(orders?profit/orders:0).toFixed(2))}
-function saveProduct(){localStorage.mm_product=JSON.stringify({pName:v('pName'),benefit:v('benefit'),price:n('price'),commission:n('commission'),refund:n('refund')})}
-function loadProduct(){try{const x=JSON.parse(localStorage.mm_product||'{}');Object.keys(x).forEach(k=>{const e=document.getElementById(k);if(e)e.value=x[k]})}catch(e){}}
-function recs(){try{return JSON.parse(localStorage.mm_records||'[]')}catch(e){return[]}} function saveRecs(x){localStorage.mm_records=JSON.stringify(x)}
-function addRecord(){const x=recs();x.unshift({date:v('dDate'),title:v('dTitle')||'Untitled',views:n('dViews'),clicks:n('dClicks'),orders:n('dOrders'),gmv:n('dGmv'),comm:n('dComm')});saveRecs(x);renderRecords()}
-function clearRecords(){if(confirm('确定清空全部收益记录？')){saveRecs([]);renderRecords()}}
-function renderRecords(){const x=recs();let sv=0,so=0,sg=0,sc=0;document.getElementById('recordsBody').innerHTML=x.map(r=>{sv+=r.views;so+=r.orders;sg+=r.gmv;sc+=r.comm;const ctr=r.views?r.clicks/r.views*100:0,cvr=r.clicks?r.orders/r.clicks*100:0,rpm=r.views?r.comm/r.views*1000:0;return '<tr><td>'+r.date+'</td><td>'+r.title+'</td><td>'+r.views.toLocaleString()+'</td><td>'+ctr.toFixed(2)+'%</td><td>'+cvr.toFixed(2)+'%</td><td>$'+r.gmv.toFixed(2)+'</td><td>$'+r.comm.toFixed(2)+'</td><td>$'+rpm.toFixed(2)+'</td></tr>'}).join('');set('kViews',sv.toLocaleString());set('kOrders',so.toLocaleString());set('kGmv','$'+sg.toFixed(2));set('kComm','$'+sc.toFixed(2));set('kExtra','整体订单率：'+(sv?so/sv*100:0).toFixed(3)+'% · 整体千播收益：$'+(sv?sc/sv*1000:0).toFixed(2))}
-const plan=[
-'确定一个主赛道，只选“家居/工具/收纳”中的一个','收集20个候选商品，填评分器','筛出评分最高的3个商品','每个商品写3个Hook，共9个','做第1条视频并发布','做第2条不同Hook视频并发布','复盘CTR/CVR，淘汰最差商品',
-'给最佳商品再做3条变体','测试前后对比角度','测试痛点解决角度','测试测评角度','记录所有视频CTR/CVR','找出最高千播收益视频','复制赢家模板做3条',
-'加入第二个高分商品','做两个商品对比测试','优化CTA','优化前3秒','优化商品页信任点','累计发布20条','周复盘：只保留前30%模板',
-'对赢家商品做5个新Hook','批量生成3条脚本','一天集中剪3条','连续发布并记录','测试不同发布时间','测试不同封面文字','计算过去7天总佣金与千播收益','砍掉低收益内容，只保留赚钱模板','制定下月：赢家商品×赢家Hook×批量复制'
-];
-function renderPlan(){const state=JSON.parse(localStorage.mm_plan||'{}');document.getElementById('planList').innerHTML=plan.map((t,i)=>'<label class="task"><input type="checkbox" '+(state[i]?'checked':'')+' onchange="togglePlan('+i+',this.checked)"><span><span class="pill">Day '+(i+1)+'</span> '+t+'</span></label>').join('')}
-function togglePlan(i,c){const s=JSON.parse(localStorage.mm_plan||'{}');s[i]=c;localStorage.mm_plan=JSON.stringify(s)}function resetPlan(){localStorage.mm_plan='{}';renderPlan()}
-function renderQC(){const q=['商品/账号具备当前地区的商业化资格','视频素材拥有权利或已取得书面授权','商业音乐来源已核对','真人出镜已确认肖像授权','商品功效没有虚假或夸大宣称','若为广告/联盟推广，已开启平台商业披露','视频加入明显原创信息和重新叙事','AI生成或明显修改内容按平台要求标注'];document.getElementById('qcList').innerHTML=q.map(x=>'<label class="task"><input type="checkbox"><span>'+x+'</span></label>').join('')}
-document.getElementById('dDate').value=new Date().toISOString().slice(0,10);loadProduct();renderRecords();renderPlan();renderQC();fillProductDemo();
+tabs.forEach(([id,n],i)=>{const b=document.createElement('button');b.textContent=n;b.className=i?'':'active';b.onclick=()=>{document.querySelectorAll('.tabs>section').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active')};nav.appendChild(b)});
+const $=id=>document.getElementById(id), num=id=>Number($(id).value)||0, val=id=>$(id).value.trim(), set=(id,t)=>$(id).textContent=t;
+async function api(path,body){const r=await fetch('/api/'+path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error((await r.json().catch(()=>({}))).error||('HTTP '+r.status));return r.json()}
+async function health(){try{const r=await fetch('/api/health',{cache:'no-store'});const j=await r.json();$('apiStatus').innerHTML='<span class="ok">● 后端在线</span> · '+j.version}catch(e){$('apiStatus').innerHTML='<span class="err">● 后端离线</span> · 请等待Vercel重新部署'}}
+function payload(){return {name:val('pName'),benefit:val('benefit'),price:num('price'),commissionRate:num('commission'),refundRate:num('refund'),visual:num('visual'),pain:num('pain'),demoEase:num('demoEase'),commissionAttractiveness:num('commScore'),competitionFriendly:num('competition'),aiFit:num('aiFit')}}
+async function scoreProduct(){try{set('scoreText','服务器计算中…');const j=await api('score',payload());set('scoreNum',j.score+'/100');$('scoreNum').className='score '+(j.score>=82?'good':j.score>=70?'mid':'bad');$('meter').style.width=j.score+'%';set('tier',j.tier);set('perOrder','$'+j.perOrder.toFixed(2));set('verdict',j.verdict);set('nextMini',j.next);set('scoreText',j.verdict+' · '+j.next);set('bottleneck','当前最弱环节：'+j.bottlenecks.join('、')+'。先修最弱项，不要平均用力。');saveProduct()}catch(e){set('scoreText','评分失败：'+e.message)}}
+async function generateScripts(){try{$('scripts').innerHTML='<div class="out">正在生成…</div>';const j=await api('script',{...payload(),angle:val('angle'),market:val('market')});let html='<div class="row">';j.variants.forEach((h,i)=>{html+='<div class="variant"><b>Hook '+(i+1)+'</b><div class="out">'+esc(h)+'</div></div>'});html+='</div>';html+='<div class="row"><div><label>中文旁白</label><div class="out">'+esc(j.cn)+'</div></div><div><label>英文旁白</label><div class="out">'+esc(j.en)+'</div></div></div>';html+='<div class="row"><div><label>镜头表</label><div class="out">'+esc(j.shots.join('\n'))+'</div></div><div><label>实验方案</label><div class="out">'+esc(j.experiments.map(x=>x.name+'：'+x.change).join('\n'))+'\n\nCTA: '+esc(j.cta)+'\nCML: '+esc(j.cml.join(' / '))+'\n'+esc(j.hashtags.join(' '))+'</div></div></div>';$('scripts').innerHTML=html}catch(e){$('scripts').innerHTML='<div class="out">生成失败：'+esc(e.message)+'</div>'}}
+async function calcProfit(){try{const j=await api('profit',{views:num('views'),ctr:num('ctr'),cvr:num('cvr'),price:num('price'),commissionRate:num('commission'),refundRate:num('refund')});set('rClicks',j.clicks.toLocaleString());set('rOrders',j.orders.toLocaleString());set('rGmv','$'+j.gmv.toFixed(2));set('rProfit','$'+j.netCommission.toFixed(2));let a='千播收益 $'+j.rpm.toFixed(2)+'；每单净佣金 $'+j.perOrder.toFixed(2)+'。';if(j.rpm<1)a+=' 当前模型偏弱，优先改Hook、商品点击意愿或佣金。';else if(j.rpm<3)a+=' 可以继续小测，重点找CTR/CVR哪一端拖后腿。';else a+=' 已有放大价值：继续复制赢家Hook，不要急着换赛道。';set('profitAdvice',a)}catch(e){set('profitAdvice','计算失败：'+e.message)}}
+function scenario(x){const m={low:[1,1.2],mid:[2.5,3],high:[4,5]}[x];$('ctr').value=m[0];$('cvr').value=m[1];calcProfit()}
+function esc(s){return String(s||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function demo(){$('pName').value='折叠水槽置物架';$('benefit').value='免打孔、快速排水、把海绵和洗洁精集中收纳，让台面更整洁';$('price').value=29.99;$('commission').value=20;$('refund').value=8;scoreProduct();generateScripts();calcProfit()}
+function saveProduct(){localStorage.mm_v3_product=JSON.stringify(payload())}
+function loadProduct(){try{const p=JSON.parse(localStorage.mm_v3_product||'{}');const map={name:'pName',benefit:'benefit',price:'price',commissionRate:'commission',refundRate:'refund',visual:'visual',pain:'pain',demoEase:'demoEase',commissionAttractiveness:'commScore',competitionFriendly:'competition',aiFit:'aiFit'};Object.entries(map).forEach(([k,id])=>{if(p[k]!=null)$(id).value=p[k]})}catch(e){}}
+function records(){try{return JSON.parse(localStorage.mm_v3_records||'[]')}catch(e){return[]}} function saveRecords(x){localStorage.mm_v3_records=JSON.stringify(x)}
+function addRecord(){const x=records();x.unshift({date:val('dDate'),title:val('dTitle')||'Untitled',views:num('dViews'),clicks:num('dClicks'),orders:num('dOrders'),gmv:num('dGmv'),comm:num('dComm')});saveRecords(x);renderRecords()}
+function clearRecords(){if(confirm('确定清空全部真实数据？')){saveRecords([]);renderRecords()}}
+function renderRecords(){const x=records();let sv=0,so=0,sg=0,sc=0;let best=null;$('recordsBody').innerHTML=x.map(r=>{sv+=r.views;so+=r.orders;sg+=r.gmv;sc+=r.comm;const ctr=r.views?r.clicks/r.views*100:0,cvr=r.clicks?r.orders/r.clicks*100:0,rpm=r.views?r.comm/r.views*1000:0;if(!best||rpm>best.rpm)best={...r,rpm,ctr,cvr};return '<tr><td>'+esc(r.date)+'</td><td>'+esc(r.title)+'</td><td>'+r.views.toLocaleString()+'</td><td>'+ctr.toFixed(2)+'%</td><td>'+cvr.toFixed(2)+'%</td><td>$'+r.gmv.toFixed(2)+'</td><td>$'+r.comm.toFixed(2)+'</td><td>$'+rpm.toFixed(2)+'</td></tr>'}).join('');set('kViews',sv.toLocaleString());set('kOrders',so.toLocaleString());set('kGmv','$'+sg.toFixed(2));set('kComm','$'+sc.toFixed(2));if(!x.length)set('kAdvice','还没有真实发布数据。先发布3条，不要继续研究。');else if(best)set('kAdvice','当前赢家：'+best.title+'，千播收益 $'+best.rpm.toFixed(2)+'，CTR '+best.ctr.toFixed(2)+'%，CVR '+best.cvr.toFixed(2)+'%。下一步只复制它的结构，改Hook，不要整条重做。')}
+function exportData(){const blob=new Blob([JSON.stringify({product:payload(),records:records(),exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='money-machine-data.json';a.click();URL.revokeObjectURL(a.href)}
+const plan=['定1个主赛道，只做家居/工具/收纳中的1个','筛20个商品，打分后只留3个','给3个商品各做3个Hook','发布第1条，不追求完美','发布第2条，只改Hook','发布第3条，做结果先行版','录入CTR/CVR/佣金，选出赢家','赢家商品再做3条变体','只优化前3秒，不改整片','加入一个诚实限制提升可信度','把最佳脚本复制到第2个商品','比较两个商品的千播收益','砍掉低收益模板','确定下周只复制1个赢家组合'];
+function renderPlan(){const s=JSON.parse(localStorage.mm_v3_plan||'{}');$('planList').innerHTML=plan.map((t,i)=>'<label class="task"><input type="checkbox" '+(s[i]?'checked':'')+' onchange="togglePlan('+i+',this.checked)"><span><span class="pill">Day '+(i+1)+'</span> '+esc(t)+'</span></label>').join('')}
+function togglePlan(i,c){const s=JSON.parse(localStorage.mm_v3_plan||'{}');s[i]=c;localStorage.mm_v3_plan=JSON.stringify(s)}
+const qc=['原视频画面已有权利或书面授权','商业音乐来源已核对','商品效果没有虚假/夸大宣称','真人出镜已确认肖像范围','联盟/广告内容已按平台要求披露','AI生成或明显修改内容按平台要求标注'];
+$('qc').innerHTML=qc.map(x=>'<label class="task"><input type="checkbox"><span>'+x+'</span></label>').join('');
+$('dDate').value=new Date().toISOString().slice(0,10);loadProduct();renderRecords();renderPlan();health();
 </script>
-</body>
-</html>
+</body></html>
